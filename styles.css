@@ -1,0 +1,1004 @@
+/* Лендинг gym gym: тёмная основа из логотипа, зелёный акцент, крупная типографика.
+   Стили независимы от Mini App: у страницы своя задача и своя аудитория. */
+
+:root {
+  color-scheme: light;
+  --bg: #f4f7f0;
+  --bg-soft: #eaf1e4;
+  --bg-card: #ffffff;
+  --ink: #12212e;
+  --ink-soft: #55675f;
+  --green: #3f7f0f;
+  --green-dark: #32660b;
+  --green-text: #2f6b0d;
+  --on-green: #ffffff;
+  --line: rgba(18, 33, 46, 0.12);
+  --line-strong: rgba(18, 33, 46, 0.22);
+  --nav-active: rgba(63, 127, 15, 0.1);
+  --topbar-bg: rgba(244, 247, 240, 0.88);
+  --card-shadow: 0 12px 32px rgba(18, 33, 46, 0.07);
+  --phone-shadow: 0 30px 70px rgba(18, 33, 46, 0.18);
+  --photo-shadow: 0 18px 40px rgba(18, 33, 46, 0.14);
+  --control-shadow: 0 1px 4px rgba(18, 33, 46, 0.08);
+  --step-bg: #ffffff;
+  --who-bg: #ffffff;
+  --dark-btn-bg: #12212e;
+  --dark-btn-ink: #ffffff;
+  --hero-glow-a: rgba(63, 127, 15, 0.16);
+  --hero-glow-b: rgba(46, 130, 246, 0.08);
+  --section-accent-bg: linear-gradient(160deg, #e7f2da, #f7fbf2);
+  --final-glow: rgba(63, 127, 15, 0.16);
+  --hover-border: rgba(63, 127, 15, 0.35);
+  --radius: 20px;
+  --wrap: 1120px;
+  --font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --bg: #0e1116;
+  --bg-soft: #161b22;
+  --bg-card: #1c222b;
+  --ink: #f2f6f4;
+  --ink-soft: #a8b3b0;
+  --green: #96f84d;
+  --green-dark: #7ad62f;
+  --green-text: #96f84d;
+  --on-green: #17240c;
+  --line: rgba(255, 255, 255, 0.09);
+  --line-strong: rgba(255, 255, 255, 0.28);
+  --nav-active: rgba(255, 255, 255, 0.07);
+  --topbar-bg: rgba(14, 17, 22, 0.86);
+  --card-shadow: 0 12px 32px rgba(0, 0, 0, 0.18);
+  --phone-shadow: 0 30px 70px rgba(0, 0, 0, 0.5);
+  --photo-shadow: 0 18px 40px rgba(0, 0, 0, 0.35);
+  --control-shadow: 0 1px 4px rgba(0, 0, 0, 0.25);
+  --step-bg: rgba(14, 17, 22, 0.55);
+  --who-bg: #161b22;
+  --dark-btn-bg: #0e1116;
+  --dark-btn-ink: #f2f6f4;
+  --hero-glow-a: rgba(63, 214, 107, 0.16);
+  --hero-glow-b: rgba(46, 166, 255, 0.12);
+  --section-accent-bg: linear-gradient(160deg, rgba(63, 214, 107, 0.14), rgba(63, 214, 107, 0.02));
+  --final-glow: rgba(63, 214, 107, 0.18);
+  --hover-border: rgba(63, 214, 107, 0.4);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font);
+  font-size: 17px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  transition: background-color 0.25s ease, color 0.25s ease;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+h1,
+h2,
+h3 {
+  line-height: 1.15;
+  margin: 0 0 14px;
+  letter-spacing: -0.02em;
+}
+
+h1 {
+  font-size: clamp(32px, 5vw, 54px);
+}
+
+h2 {
+  font-size: clamp(26px, 3.4vw, 40px);
+}
+
+h3 {
+  font-size: 19px;
+}
+
+p {
+  margin: 0 0 14px;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Ссылка внутри текста должна выглядеть ссылкой. Общее правило выше годится кнопкам и меню
+   (там она и задумана: вид задаёт класс), но в абзаце цвет и подчёркивание наследуются от
+   текста, и такую ссылку не отличить от обычных слов — на это и указал владелец 13.10.2026:
+   контакт поддержки в «частых вопросах» читался как текст, хотя нажимался.
+   Поэтому в тексте — акцент и подчёркивание; кнопки, меню и подвал не трогаем. */
+.accordion p a,
+.accordion li a {
+  color: var(--green-text);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+}
+
+/* Наведение только усиливает подчёркивание: цвет акцента на тёмном фоне и так самый
+   заметный, а затемнять его при наведении — значит делать ссылку хуже видимой. */
+.accordion p a:hover,
+.accordion li a:hover {
+  text-decoration-thickness: 2px;
+}
+
+.accordion p a:focus-visible,
+.accordion li a:focus-visible {
+  outline: 2px solid var(--green);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+.wrap {
+  width: 100%;
+  max-width: var(--wrap);
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.wrap-narrow {
+  max-width: 780px;
+}
+
+.accent {
+  color: var(--green-text);
+}
+
+/* ---------- шапка ---------- */
+
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  background: var(--topbar-bg);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--line);
+  transition: background-color 0.25s ease, border-color 0.25s ease;
+}
+
+.topbar-inner {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  min-height: 68px;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+}
+
+/* Название проекта текстом: значок рядом убран, в шапке не хватало ширины навигации.
+   Буквы шире и ниже обычных — название читается как знак, а не как набранный текст. */
+.brand-name {
+  /* Строчный элемент не масштабируется: без этого transform молча ничего не делает. */
+  display: inline-block;
+  font-size: 21px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  transform: scale(1.18, 0.88);
+  /* Растёт вправо, не сдвигая левый край: название стоит по сетке страницы, а не по центру. */
+  transform-origin: left center;
+  /* Масштаб расширяет буквы, но разметку не меняет: буквы вылезают вправо на 18 % своей
+     ширины (около 0.7em), и без запаса название упиралось в кнопку и в год под ним. */
+  margin-right: 0.72em;
+}
+
+.brand-name span {
+  color: var(--green-text);
+}
+
+.nav {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 4px;
+  /* Навигация идёт сразу за названием, а не прижимается вправо: справа живёт переключатель
+     темы, и он один держится за правый край страницы. */
+  margin-left: 12px;
+}
+
+.nav a {
+  padding: 8px 12px;
+  border-radius: 999px;
+  font-size: 15px;
+  white-space: nowrap;
+  color: var(--ink-soft);
+  transition: color 0.15s, background 0.15s;
+}
+
+.nav a:hover {
+  color: var(--ink);
+}
+
+.nav a.active {
+  color: var(--green-text);
+  background: var(--nav-active);
+}
+
+/* Кнопка бота стоит по центру свободного места между навигацией и тумблером, а тумблер
+   держится правого края при любой ширине (в том числе когда навигация на телефоне скрыта):
+   для этого ряд забирает остаток ширины целиком, а кнопка отдаёт равные поля слева и справа. */
+.topbar-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex: 1 1 auto;
+}
+
+/* Кнопка «Открыть бота» — по центру: одинаковые поля с обеих сторон до навигации и до тумблера. */
+.topbar-actions .btn-small {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Переключатель темы — тот же компонент, что в профиле тренера: солнце, тумблер, луна. */
+.theme-controller-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 8px;
+  min-height: 34px;
+  background: var(--bg-card);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  cursor: pointer;
+  user-select: none;
+  box-shadow: var(--control-shadow);
+  transition: border-color 0.2s ease, background-color 0.2s ease;
+}
+
+.theme-controller-btn:hover {
+  border-color: var(--green);
+}
+
+.theme-controller-btn .toggle {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 28px;
+  height: 16px;
+  margin: 0;
+  border-radius: 999px;
+  background: var(--bg-soft);
+  border: 1px solid var(--line-strong);
+  position: relative;
+  cursor: pointer;
+  outline: none;
+  flex-shrink: 0;
+  transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.theme-controller-btn .toggle::before {
+  content: "";
+  position: absolute;
+  top: 1px;
+  left: 1px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #ffffff;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+  transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+.theme-controller-btn .toggle:checked {
+  background: var(--green);
+  border-color: var(--green);
+}
+
+.theme-controller-btn .toggle:checked::before {
+  transform: translateX(12px);
+  background: var(--on-green);
+}
+
+.theme-icon {
+  flex-shrink: 0;
+  color: var(--ink-soft);
+  opacity: 0.5;
+  transition: color 0.2s ease, opacity 0.2s ease;
+}
+
+:root[data-theme="light"] .theme-icon-sun {
+  color: #d48806;
+  opacity: 1;
+}
+
+:root[data-theme="dark"] .theme-icon-moon {
+  color: #818cf8;
+  opacity: 1;
+}
+
+a:focus-visible,
+button:focus-visible,
+summary:focus-visible,
+.theme-controller-btn:focus-within {
+  outline: 2px solid var(--green-text);
+  outline-offset: 2px;
+}
+
+/* ---------- кнопки ---------- */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border: 1px solid transparent;
+  border-radius: 999px;
+  padding: 12px 22px;
+  font-size: 16px;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+  transition: transform 0.12s ease, background 0.15s, border-color 0.15s;
+}
+
+.btn:active {
+  transform: translateY(1px);
+}
+
+.btn-small {
+  padding: 9px 16px;
+  font-size: 15px;
+  background: var(--green);
+  color: var(--on-green);
+}
+
+.btn-big {
+  padding: 15px 28px;
+  font-size: 17px;
+}
+
+.btn-primary {
+  background: var(--green);
+  color: var(--on-green);
+}
+
+.btn-primary:hover {
+  background: var(--green-dark);
+}
+
+.btn-ghost {
+  border-color: var(--line);
+  color: var(--ink);
+}
+
+.btn-ghost:hover {
+  border-color: var(--line-strong);
+}
+
+.btn-dark {
+  background: var(--dark-btn-bg);
+  color: var(--dark-btn-ink);
+}
+
+/* ---------- первый экран ---------- */
+
+.hero {
+  padding: 64px 0 40px;
+  background:
+    radial-gradient(1000px 520px at 82% 8%, var(--hero-glow-a), transparent 62%),
+    radial-gradient(760px 420px at 6% 92%, var(--hero-glow-b), transparent 60%);
+}
+
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1.05fr 0.95fr;
+  gap: 40px;
+  align-items: center;
+}
+
+.eyebrow {
+  display: inline-block;
+  margin-bottom: 16px;
+  padding: 7px 14px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--bg-card);
+  font-size: 14px;
+  color: var(--green-text);
+}
+
+.lead {
+  font-size: 19px;
+  color: var(--ink-soft);
+  max-width: 560px;
+}
+
+.cta-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin: 26px 0 22px;
+}
+
+.cta-row.center {
+  justify-content: center;
+}
+
+.hero-points {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 8px;
+  color: var(--ink-soft);
+  font-size: 16px;
+}
+
+.hero-points li::before {
+  content: "✓";
+  color: var(--green-text);
+  margin-right: 10px;
+}
+
+/* ---------- телефоны ---------- */
+
+/* Два снимка рядом, как две рамки. Ничего не обрезаем и не растягиваем:
+   скриншот показывает интерфейс целиком, поэтому пропорции задаёт сам файл. */
+.phone-stack {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 18px;
+}
+
+.phone {
+  margin: 0;
+  border-radius: 34px;
+  border: 1px solid var(--line);
+  background: var(--bg-card);
+  padding: 8px;
+  box-shadow: var(--phone-shadow);
+  overflow: hidden;
+}
+
+.phone img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 26px;
+}
+
+.phone-front {
+  flex: 0 1 232px;
+  max-width: 232px;
+}
+
+.phone-back {
+  flex: 0 1 196px;
+  max-width: 196px;
+  margin-top: 64px;
+  opacity: 0.95;
+}
+
+/* ---------- секции ---------- */
+
+.section {
+  padding: 72px 0;
+}
+
+.section-dark {
+  background: var(--bg-soft);
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+
+.section-accent {
+  background: var(--section-accent-bg);
+}
+
+.section-lead {
+  color: var(--ink-soft);
+  max-width: 720px;
+  margin-bottom: 34px;
+  font-size: 18px;
+}
+
+/* ---------- боли ---------- */
+
+.pain-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+
+.pain {
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 22px;
+  background: var(--bg-card);
+  box-shadow: var(--card-shadow);
+}
+
+.pain-mark {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--green-text);
+  letter-spacing: 0.08em;
+}
+
+.pain h3 {
+  margin: 10px 0 8px;
+  font-size: 18px;
+}
+
+.pain p {
+  margin: 0;
+  color: var(--ink-soft);
+  font-size: 16px;
+}
+
+.after-note {
+  margin-top: 26px;
+  font-size: 18px;
+  color: var(--ink);
+}
+
+/* ---------- что нового ---------- */
+
+.section-new {
+  background: linear-gradient(180deg, var(--bg), var(--bg-soft));
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+
+.new-grid {
+  display: grid;
+  /* Четыре карточки в ряд на широком экране: три оставляли бы внизу одинокую половину ряда. */
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+
+.new-card {
+  position: relative;
+  overflow: hidden;
+  background: var(--bg-card);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 24px;
+  box-shadow: var(--card-shadow);
+}
+
+.new-card::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto;
+  height: 3px;
+  background: linear-gradient(90deg, var(--green), transparent);
+}
+
+.new-tag {
+  display: inline-block;
+  margin-bottom: 12px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: var(--nav-active);
+  color: var(--green-text);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+.new-card h3 {
+  font-size: 19px;
+  margin-bottom: 10px;
+}
+
+.new-card p {
+  margin: 0;
+  color: var(--ink-soft);
+  font-size: 16px;
+}
+
+/* ---------- возможности ---------- */
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+.card {
+  background: var(--bg-card);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 22px;
+  box-shadow: var(--card-shadow);
+  transition: transform 0.15s ease, border-color 0.15s, box-shadow 0.15s;
+}
+
+.card:hover {
+  transform: translateY(-3px);
+  border-color: var(--hover-border);
+  box-shadow: 0 18px 42px rgba(18, 33, 46, 0.12);
+}
+
+.card-icon {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.card h3 {
+  font-size: 18px;
+  margin-bottom: 8px;
+}
+
+.card p {
+  margin: 0;
+  color: var(--ink-soft);
+  font-size: 16px;
+}
+
+/* ---------- кому подходит ---------- */
+
+.who-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 18px;
+}
+
+.who {
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--who-bg);
+  padding: 22px;
+  text-align: center;
+  box-shadow: var(--card-shadow);
+  transition: transform 0.15s ease, border-color 0.15s;
+}
+
+.who:hover {
+  transform: translateY(-3px);
+  border-color: var(--hover-border);
+}
+
+/* В карточках «кому подходит» снимок стоит как телефон в руке: без обрезки и растяжения,
+   иначе интерфейс выглядит увеличенным до неузнаваемости. */
+.who-photo {
+  display: block;
+  width: 240px;
+  max-width: 100%;
+  height: auto;
+  margin: 0 auto 18px;
+  border-radius: 22px;
+  border: 1px solid var(--line);
+  box-shadow: var(--photo-shadow);
+}
+
+.who-body {
+  padding: 18px 20px 22px;
+  text-align: left;
+}
+
+.who-body p {
+  margin: 0;
+  color: var(--ink-soft);
+  font-size: 16px;
+}
+
+/* ---------- шаги ---------- */
+
+.steps {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 30px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+  counter-reset: step;
+}
+
+.steps li {
+  background: var(--step-bg);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 24px;
+  box-shadow: var(--card-shadow);
+}
+
+.step-num {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--green);
+  color: var(--on-green);
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+
+.steps p {
+  margin: 0;
+  color: var(--ink-soft);
+  font-size: 16px;
+}
+
+/* ---------- безопасность и 152-фз ---------- */
+
+.privacy-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+.privacy-card {
+  background: var(--bg-card);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 22px;
+  box-shadow: var(--card-shadow);
+  transition: transform 0.15s ease, border-color 0.15s, box-shadow 0.15s;
+}
+
+.privacy-card:hover {
+  transform: translateY(-3px);
+  border-color: var(--hover-border);
+  box-shadow: 0 18px 42px rgba(18, 33, 46, 0.12);
+}
+
+.privacy-icon {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.privacy-card h3 {
+  font-size: 18px;
+  margin-bottom: 8px;
+}
+
+.privacy-card p {
+  margin: 0;
+  color: var(--ink-soft);
+  font-size: 16px;
+}
+
+/* ---------- аккордеон ---------- */
+
+.accordion details {
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: var(--bg-card);
+  margin-bottom: 10px;
+  padding: 4px 20px;
+}
+
+.accordion summary {
+  cursor: pointer;
+  padding: 16px 0;
+  font-size: 18px;
+  font-weight: 600;
+  list-style: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.accordion summary::-webkit-details-marker {
+  display: none;
+}
+
+.accordion summary::after {
+  content: "+";
+  font-size: 24px;
+  font-weight: 400;
+  color: var(--green-text);
+  transition: transform 0.2s ease;
+}
+
+.accordion details[open] summary::after {
+  transform: rotate(45deg);
+}
+
+.accordion details p {
+  margin: 0 0 18px;
+  color: var(--ink-soft);
+  font-size: 16px;
+}
+
+/* ---------- финал и подвал ---------- */
+
+.final {
+  padding: 78px 0;
+  background:
+    radial-gradient(760px 420px at 50% 0%, var(--final-glow), transparent 65%),
+    var(--bg-soft);
+  border-top: 1px solid var(--line);
+  text-align: center;
+}
+
+.final-logo {
+  margin: 0 auto 18px;
+  border-radius: 50%;
+}
+
+.final p {
+  color: var(--ink-soft);
+  max-width: 560px;
+  margin: 0 auto 26px;
+}
+
+.footer {
+  border-top: 1px solid var(--line);
+  padding: 26px 0;
+  font-size: 15px;
+  color: var(--ink-soft);
+}
+
+.footer-inner {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.footer-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.footer-year {
+  font-size: 13px;
+  color: var(--ink-soft);
+}
+
+.footer-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.footer-nav a:hover {
+  color: var(--green-text);
+}
+
+/* ---------- адаптив ---------- */
+
+@media (max-width: 1100px) {
+  .who-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  /* Четыре карточки «Что нового» в ряд помещаются только на широком экране: на планшете
+     они сжимаются до 230px, и заголовок ломается на три строки. Две колонки читаются лучше. */
+  .new-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 980px) {
+  .nav {
+    display: none;
+  }
+
+  .hero-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .phone-stack {
+    margin-top: 18px;
+  }
+
+  .pain-grid,
+  .cards,
+  .who-grid,
+  .steps,
+  .privacy-grid,
+  .new-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  body {
+    font-size: 16px;
+  }
+
+  .section {
+    padding: 54px 0;
+  }
+
+  .pain-grid,
+  .cards,
+  .who-grid,
+  .steps,
+  .privacy-grid,
+  .new-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .topbar-inner {
+    min-height: 62px;
+    gap: 10px;
+  }
+
+  .topbar-actions {
+    gap: 6px;
+  }
+
+  .topbar .btn-small {
+    padding: 8px 12px;
+    font-size: 14px;
+  }
+
+  .theme-controller-btn {
+    padding: 3px 6px;
+    gap: 4px;
+  }
+
+  .brand-name {
+    font-size: 19px;
+  }
+
+  .who-photo {
+    width: 210px;
+  }
+
+  .phone-front {
+    flex-basis: 200px;
+  }
+
+  .phone-back {
+    flex-basis: 168px;
+    margin-top: 44px;
+  }
+
+  .cta-row .btn {
+    flex: 1 1 auto;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
+}
+
+@media (max-width: 360px) {
+  .topbar-inner {
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+
+  .topbar .btn-small {
+    padding: 7px 10px;
+    font-size: 13px;
+  }
+
+  .theme-controller-btn {
+    padding: 3px 5px;
+  }
+
+  .brand-name {
+    font-size: 18px;
+  }
+}
